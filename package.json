@@ -18,7 +18,8 @@
     "framer-motion": "^10.10.0",
     "generator-goncy": "^2.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-svg": "^16.1.7"
   },
   "devDependencies": {
     "@types/node": "^18.15.11",

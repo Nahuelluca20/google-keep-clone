@@ -1,4 +1,4 @@
-import {AddIcon, EditIcon, CheckIcon} from "@chakra-ui/icons";
+import {EditIcon, CheckIcon} from "@chakra-ui/icons";
 import {
   IconButton,
   Drawer,
@@ -10,9 +10,10 @@ import {
   VStack,
   DrawerFooter,
   Text,
-  Stack,
 } from "@chakra-ui/react";
 import React, {useState} from "react";
+
+import SideBarIcons from "./SideBarIcons";
 export interface SideBarProps {}
 
 const SideBar: React.FC<SideBarProps> = () => {
@@ -24,17 +25,9 @@ const SideBar: React.FC<SideBarProps> = () => {
 
   return (
     <>
-      <IconButton
-        aria-label="Menu"
-        icon={<AddIcon />}
-        left="0"
-        position="fixed"
-        size="lg"
-        top="12"
-        variant="solid"
-        onClick={toggleDrawer}
-      />
-      <Drawer isOpen={isOpen} placement="left" size="sideBar" onClose={toggleDrawer}>
+      <SideBarIcons toggleDrawer={toggleDrawer} />
+
+      {/* <Drawer isOpen={isOpen} placement="left" size="sideBar" onClose={toggleDrawer}>
         <DrawerOverlay />
         <DrawerContent marginTop="12">
           <DrawerCloseButton />
@@ -61,8 +54,8 @@ const SideBar: React.FC<SideBarProps> = () => {
             <IconButton aria-label="Edit" icon={<EditIcon />} variant="ghost" />
             <IconButton aria-label="Check" icon={<CheckIcon />} ml="auto" variant="solid" />
           </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+        </DrawerContent> */}
+      {/* </Drawer> */}
     </>
   );
 };
