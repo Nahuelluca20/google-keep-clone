@@ -1,20 +1,25 @@
 import {Box, Flex, IconButton, Image, Avatar, Text} from "@chakra-ui/react";
 import {HamburgerIcon} from "@chakra-ui/icons";
+import {useDispatch} from "react-redux";
 
 import {SearchBar} from "../SearchBar";
 
 import keepLogo from "@/assets/keepLogo.png";
+import {changeOpenMenu} from "@/redux/states/navbarState";
 
 export interface NavbarProps {}
 
 const Navbar: React.FC<NavbarProps> = () => {
+  const dispatch = useDispatch();
+
   return (
-    <Flex alignItems={"center"} bg="white" boxShadow="md" px="4" py={["1", "3"]}>
+    <Flex alignItems={"center"} bg="white" boxShadow="md" px="3" py={["1", "3"]}>
       <IconButton
         isRound
         aria-label="Menu"
         icon={<HamburgerIcon color="brand.700" h={[5, 6]} w={[5, 6]} />}
         variant="ghost"
+        onClick={() => dispatch(changeOpenMenu())}
       />
 
       <Image alt="Logo" h={["35px", "40px"]} mx="2" src={keepLogo} w={["35px", "40px"]} />

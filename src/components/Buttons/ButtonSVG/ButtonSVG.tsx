@@ -1,31 +1,29 @@
 import {useState} from "react";
 import {Box} from "@chakra-ui/react";
 import {ReactSVG} from "react-svg";
+import {useSelector, useDispatch} from "react-redux";
+
+import {RootState} from "@/redux";
+import {change} from "@/redux/states/navbarState";
 
 export interface ButtonSVGProps {
   image: string;
-  toggleDrawer?: () => void;
+  name: string;
 }
 
-const ButtonSVG: React.FC<ButtonSVGProps> = ({image, toggleDrawer}) => {
-  const [fillColor, setFillColor] = useState({
-    svgColor: "#5f6368",
-    bgColor: "transparent",
-  });
+const ButtonSVG: React.FC<ButtonSVGProps> = ({image, name}) => {
+  const nav = useSelector((state: RootState) => state.navbar.value);
+  const dispatch = useDispatch();
+
   const handleColorChange = () => {
-    toggleDrawer && toggleDrawer();
-    if (fillColor.svgColor === "#5f6368") {
-      setFillColor({svgColor: "#202124", bgColor: "#feefc3"});
-    } else {
-      setFillColor({svgColor: "#5f6368", bgColor: "transparent"});
-    }
+    dispatch(change(name));
   };
 
   return (
     <>
       <Box
         alignItems={"center"}
-        backgroundColor={fillColor.bgColor}
+        backgroundColor={nav === name ? "#feefc3" : "transparent"}
         borderRadius={"full"}
         color="white"
         display={"flex"}
@@ -37,7 +35,7 @@ const ButtonSVG: React.FC<ButtonSVGProps> = ({image, toggleDrawer}) => {
       >
         <ReactSVG
           beforeInjection={(svg) => {
-            svg.setAttribute("fill", fillColor.svgColor);
+            svg.setAttribute("fill", nav === name ? "#202124" : "#5f6368");
           }}
           src={image}
         />
