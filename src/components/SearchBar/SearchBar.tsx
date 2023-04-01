@@ -26,6 +26,7 @@ const SearchBar: React.FC<SearchBarProps> = () => {
         <Input
           alignItems="center"
           bg={"brand.800"}
+          bgColor={"#F1F3F4"}
           boxShadow={"0 1px 1px 0 rgba(65,69,73,.3), 0 1px 3px 1px rgba(65,69,73,.15)"}
           display={["none", "flex"]}
           pl={10}

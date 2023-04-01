@@ -30,6 +30,7 @@ const ButtonSVG: React.FC<ButtonSVGProps> = ({image, name}) => {
         height={"43px"}
         justifyContent="center"
         p={1}
+        transition="all 0.4s"
         width={"43px"}
         onClick={handleColorChange}
       >
