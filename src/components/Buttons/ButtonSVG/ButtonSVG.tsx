@@ -8,7 +8,7 @@ import {change} from "@/redux/states/navbarState";
 
 export interface ButtonSVGProps {
   image: string;
-  name: string;
+  name?: string;
 }
 
 const ButtonSVG: React.FC<ButtonSVGProps> = ({image, name}) => {
@@ -16,7 +16,7 @@ const ButtonSVG: React.FC<ButtonSVGProps> = ({image, name}) => {
   const dispatch = useDispatch();
 
   const handleColorChange = () => {
-    dispatch(change(name));
+    name && dispatch(change(name));
   };
 
   return (

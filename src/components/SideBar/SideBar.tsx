@@ -8,7 +8,7 @@ import ReminderSvg from "@/assets/reminder.svg";
 import EditSvg from "@/assets/edit.svg";
 import TagSvg from "@/assets/tag.svg";
 import TrashSvg from "@/assets/trash.svg";
-import ArchiveSvg from "@/assets/archive.svg";
+import ArchiveSvg from "@/assets/archive-note.svg";
 import {change} from "@/redux/states/navbarState";
 import {RootState} from "@/redux";
 
@@ -33,7 +33,13 @@ const SideBar: React.FC<SideBarProps> = () => {
 
   return (
     <>
-      <HStack h={"100vh"}>
+      <HStack
+        bgColor={openMenu ? "white" : "transparent"}
+        h={"100vh"}
+        position={"fixed"}
+        top={["50px", "70px"]}
+        zIndex={4}
+      >
         <Stack
           boxShadow={
             openMenu
@@ -44,7 +50,7 @@ const SideBar: React.FC<SideBarProps> = () => {
           height={"100%"}
           pt={3}
           spacing={2}
-          transition="all 0.2s"
+          transition="all 0.1s"
           w={openMenu ? "280px" : "60px"}
         >
           {menuOptions.map((option) => (
@@ -53,6 +59,7 @@ const SideBar: React.FC<SideBarProps> = () => {
               alignItems={"center"}
               backgroundColor={nav === option.name && openMenu ? "#feefc3" : "transparent"}
               borderRightRadius={"40px"}
+              cursor={"pointer"}
               pl={3}
               py={1}
               transition="all 0.4s"
