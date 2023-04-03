@@ -6,3 +6,4 @@ export * from "./NoteInput";
 export * from "./Notes";
 export * from "./SearchBar";
 export * from "./SideBar";
+export * from "./Tags";

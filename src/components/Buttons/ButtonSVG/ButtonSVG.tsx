@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {Box} from "@chakra-ui/react";
 import {ReactSVG} from "react-svg";
 import {useSelector, useDispatch} from "react-redux";
