@@ -1,7 +1,7 @@
 import {HStack} from "@chakra-ui/react";
 import {useSelector} from "react-redux";
 
-import {Layout, NotesPage} from "./pages";
+import {ArchivePage, Layout, NotesPage} from "./pages";
 import {RootState} from "./redux";
 
 import {Navbar, SideBar} from "@/components";
@@ -14,7 +14,10 @@ function App() {
       <Navbar />
       <HStack>
         <SideBar />
-        <Layout>{nav === "notes" && <NotesPage />}</Layout>
+        <Layout>
+          {nav === "notes" && <NotesPage />}
+          {nav === "archive" && <ArchivePage />}
+        </Layout>
       </HStack>
     </div>
   );

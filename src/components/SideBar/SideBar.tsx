@@ -9,7 +9,7 @@ import EditSvg from "@/assets/edit.svg";
 import TagSvg from "@/assets/tag.svg";
 import TrashSvg from "@/assets/trash.svg";
 import ArchiveSvg from "@/assets/archive-note.svg";
-import {change} from "@/redux/states/navbarState";
+import {change, changeOpenMenuHover} from "@/redux/states/navbarState";
 import {RootState} from "@/redux";
 
 export interface SideBarProps {}
@@ -39,6 +39,8 @@ const SideBar: React.FC<SideBarProps> = () => {
         position={"fixed"}
         top={["50px", "70px"]}
         zIndex={4}
+        onMouseEnter={() => dispatch(changeOpenMenuHover(true))}
+        onMouseLeave={() => dispatch(changeOpenMenuHover(false))}
       >
         <Stack
           boxShadow={
@@ -50,7 +52,7 @@ const SideBar: React.FC<SideBarProps> = () => {
           height={"100%"}
           pt={3}
           spacing={2}
-          transition="all 0.1s"
+          transition="all 0.3s"
           w={openMenu ? "280px" : "60px"}
         >
           {menuOptions.map((option) => (
@@ -62,7 +64,7 @@ const SideBar: React.FC<SideBarProps> = () => {
               cursor={"pointer"}
               pl={3}
               py={1}
-              transition="all 0.4s"
+              transition="all 0.5s"
               w={openMenu ? "280px" : "60px"}
               onClick={() => handleColorChange(option.name)}
             >
