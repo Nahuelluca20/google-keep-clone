@@ -1,15 +1,16 @@
 import React from "react";
+import {Stack} from "@chakra-ui/react";
 
 import {EmptyPage} from "@/components/EmptyPage";
-import Arhive from "@/assets/archive-note.svg";
+import Arhive from "@/assets/archive-empty.svg";
 
 export interface ArchivePageProps {}
 
 const ArchivePage: React.FC<ArchivePageProps> = () => {
   return (
-    <div>
-      <EmptyPage image={Arhive} text="archive" />
-    </div>
+    <Stack pt={"200px"}>
+      <EmptyPage image={Arhive} text="Tus notas archivadas aparecerán aquí" />
+    </Stack>
   );
 };
 

@@ -7,10 +7,12 @@ export interface EmptyPageProps {
 
 const EmptyPage: React.FC<EmptyPageProps> = ({image, text}) => {
   return (
-    <Stack>
+    <Stack alignItems={"center"}>
       {/* #E5E5E5 */}
       <Image height={"120px"} src={image} width={"120px"} />
-      <Text>{text}</Text>
+      <Text color={"#5f6368"} fontSize={"1.375rem"} fontWeight={400} textAlign={"center"}>
+        {text}
+      </Text>
     </Stack>
   );
 };
