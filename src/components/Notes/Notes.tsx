@@ -1,4 +1,4 @@
-import {Button, Image, HStack, Stack, Text, Flex, Box} from "@chakra-ui/react";
+import {Image, HStack, Stack, Text, Box} from "@chakra-ui/react";
 import {useState} from "react";
 import {ReactSVG} from "react-svg";
 

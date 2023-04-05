@@ -1,8 +1,9 @@
 import {HStack, Stack, Text} from "@chakra-ui/react";
 import {useSelector, useDispatch} from "react-redux";
+import {useState} from "react";
 
-import {ButtonSVG} from "../Buttons";
-
+import {ButtonSVG} from "@/components";
+import {EditModal} from "@/components";
 import NotesSvg from "@/assets/notes.svg";
 import ReminderSvg from "@/assets/reminder.svg";
 import EditSvg from "@/assets/edit.svg";
@@ -15,6 +16,7 @@ import {RootState} from "@/redux";
 export interface SideBarProps {}
 
 const SideBar: React.FC<SideBarProps> = () => {
+  const [isOpenState, setIsOpenState] = useState(true);
   const nav = useSelector((state: RootState) => state.navbar.value);
   const openMenu = useSelector((state: RootState) => state.navbar.openMenu);
   const dispatch = useDispatch();
@@ -26,7 +28,11 @@ const SideBar: React.FC<SideBarProps> = () => {
     {textContent: "Notas", name: "notes", image: NotesSvg},
     {textContent: "Recordatorios", name: "reminder", image: ReminderSvg},
     {textContent: "Importante", name: "tag", image: TagSvg},
-    {textContent: "Editar", name: "edit", image: EditSvg},
+    {
+      textContent: "Editar",
+      image: EditSvg,
+      onclick: () => setIsOpenState(true),
+    },
     {textContent: "Archivados", name: "archive", image: ArchiveSvg},
     {textContent: "Papelera", name: "trash", image: TrashSvg},
   ];
@@ -42,6 +48,7 @@ const SideBar: React.FC<SideBarProps> = () => {
         onMouseEnter={() => dispatch(changeOpenMenuHover(true))}
         onMouseLeave={() => dispatch(changeOpenMenuHover(false))}
       >
+        <EditModal isOpen={isOpenState} onClose={() => setIsOpenState(false)} />
         <Stack
           boxShadow={
             openMenu
@@ -57,16 +64,27 @@ const SideBar: React.FC<SideBarProps> = () => {
         >
           {menuOptions.map((option) => (
             <HStack
-              key={option.name}
+              // {backgroundColor: "#F1F3F4"}
+              key={option.textContent}
               alignItems={"center"}
               backgroundColor={nav === option.name && openMenu ? "#feefc3" : "transparent"}
               borderRightRadius={"40px"}
               cursor={"pointer"}
               pl={3}
               py={1}
+              sx={{
+                "&:hover": {
+                  bg: nav === option.name && openMenu ? "#feefc3" : "#F1F3F4",
+                },
+              }}
               transition="all 0.5s"
               w={openMenu ? "280px" : "60px"}
-              onClick={() => handleColorChange(option.name)}
+              onClick={() => {
+                if (option.name) {
+                  handleColorChange(option.name);
+                }
+                option.onclick && option?.onclick();
+              }}
             >
               <Stack>
                 <ButtonSVG image={option.image} name={option.name} />
