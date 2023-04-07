@@ -9,6 +9,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
+
+import InputTag from "./InputTag";
 export interface EditModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -20,12 +22,13 @@ const EditModal: React.FC<EditModalProps> = ({isOpen, onClose}) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent height={"395px"} width={"300px"}>
-          <ModalHeader>
+          <ModalHeader height={10}>
             <Text color={"#202124"} fontSize={"1rem"} fontWeight={500}>
               Editar etiquetas
             </Text>
           </ModalHeader>
           <ModalBody>
+            <InputTag />
             <Text>GOALALALAL</Text>
           </ModalBody>
 
