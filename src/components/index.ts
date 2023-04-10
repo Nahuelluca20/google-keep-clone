@@ -1,4 +1,4 @@
-export * from "./Buttons/ButtonSVG";
+export * from "./Buttons/ButtonNavSVG";
 export * from "./Buttons";
 export * from "./CreateNote";
 export * from "./EditModal";

@@ -11,11 +11,11 @@ import {
 import React from "react";
 
 import InputTag from "./InputTag";
+import Taglist from "./Taglist";
 export interface EditModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
 const EditModal: React.FC<EditModalProps> = ({isOpen, onClose}) => {
   return (
     <>
@@ -27,16 +27,22 @@ const EditModal: React.FC<EditModalProps> = ({isOpen, onClose}) => {
               Editar etiquetas
             </Text>
           </ModalHeader>
-          <ModalBody>
+          <ModalBody px={"15px"}>
             <InputTag />
-            <Text>GOALALALAL</Text>
+            <Taglist />
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
+            <Button
+              colorScheme="blue"
+              fontSize={"0.875rem"}
+              fontWeight={500}
+              mr={3}
+              variant={"unstyled"}
+              onClick={onClose}
+            >
+              Finalizado
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

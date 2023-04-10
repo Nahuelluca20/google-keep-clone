@@ -2,7 +2,7 @@ import {HStack, Stack, Text} from "@chakra-ui/react";
 import {useSelector, useDispatch} from "react-redux";
 import {useState} from "react";
 
-import {ButtonSVG} from "@/components";
+import {ButtonNavSVG} from "@/components";
 import {EditModal} from "@/components";
 import NotesSvg from "@/assets/notes.svg";
 import ReminderSvg from "@/assets/reminder.svg";
@@ -16,7 +16,7 @@ import {RootState} from "@/redux";
 export interface SideBarProps {}
 
 const SideBar: React.FC<SideBarProps> = () => {
-  const [isOpenState, setIsOpenState] = useState(true);
+  const [isOpenState, setIsOpenState] = useState(false);
   const nav = useSelector((state: RootState) => state.navbar.value);
   const openMenu = useSelector((state: RootState) => state.navbar.openMenu);
   const dispatch = useDispatch();
@@ -64,7 +64,6 @@ const SideBar: React.FC<SideBarProps> = () => {
         >
           {menuOptions.map((option) => (
             <HStack
-              // {backgroundColor: "#F1F3F4"}
               key={option.textContent}
               alignItems={"center"}
               backgroundColor={nav === option.name && openMenu ? "#feefc3" : "transparent"}
@@ -87,7 +86,7 @@ const SideBar: React.FC<SideBarProps> = () => {
               }}
             >
               <Stack>
-                <ButtonSVG image={option.image} name={option.name} />
+                <ButtonNavSVG height="43px" image={option.image} name={option.name} width="43px" />
               </Stack>
               <Text
                 color={nav === option.name ? "#202124" : "#5f6368"}
