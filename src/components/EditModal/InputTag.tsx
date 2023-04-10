@@ -1,7 +1,7 @@
 import {HStack, Input} from "@chakra-ui/react";
 import {useState} from "react";
 
-import {ButtonHover, ButtonSvg} from "../Buttons";
+import {ButtonHover, ButtonSVG} from "../Buttons";
 
 import closeTag from "@/assets/closeTag.svg";
 import addTag from "@/assets/addTag.svg";
@@ -22,7 +22,7 @@ const InputTag: React.FC<Props> = ({}) => {
         onMouseEnter={() => setHovering({...hovering, cancel: true})}
         onMouseLeave={() => setHovering({...hovering, cancel: false})}
       >
-        <ButtonSvg height={"25px"} hovered={hovering.cancel} image={closeTag} width={"25px"} />
+        <ButtonSVG height={"25px"} hovered={hovering.cancel} image={closeTag} width={"25px"} />
       </ButtonHover>
       <Input
         _focus={{borderBottom: "1px solid rgba(0,0,0,.2)"}}
@@ -40,7 +40,7 @@ const InputTag: React.FC<Props> = ({}) => {
         onMouseEnter={() => setHovering({...hovering, add: true})}
         onMouseLeave={() => setHovering({...hovering, add: false})}
       >
-        <ButtonSvg height={"25px"} hovered={hovering.add} image={addTag} width={"25px"} />
+        <ButtonSVG height={"25px"} hovered={hovering.add} image={addTag} width={"25px"} />
       </ButtonHover>
     </HStack>
   );

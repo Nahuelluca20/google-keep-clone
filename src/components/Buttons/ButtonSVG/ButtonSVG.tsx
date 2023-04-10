@@ -1,14 +1,14 @@
 import {Box} from "@chakra-ui/react";
 import {ReactSVG} from "react-svg";
 
-export interface ButtonSvgProps {
+export interface ButtonSVGProps {
   hovered: boolean;
   image: string;
   height: string;
   width: string;
 }
 
-const ButtonSvg: React.FC<ButtonSvgProps> = ({width, height, image, hovered}) => {
+const ButtonSVG: React.FC<ButtonSVGProps> = ({width, height, image, hovered}) => {
   return (
     <Box
       alignItems={"center"}
@@ -31,4 +31,4 @@ const ButtonSvg: React.FC<ButtonSvgProps> = ({width, height, image, hovered}) =>
   );
 };
 
-export default ButtonSvg;
+export default ButtonSVG;

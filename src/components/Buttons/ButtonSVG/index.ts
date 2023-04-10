@@ -1,1 +1,1 @@
-export {default as ButtonSvg} from "./ButtonSvg";
+export {default as ButtonSVG} from "./ButtonSVG";

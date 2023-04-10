@@ -1,7 +1,7 @@
 import {HStack, Input} from "@chakra-ui/react";
 import {useState} from "react";
 
-import {ButtonHover, ButtonSvg} from "../Buttons";
+import {ButtonHover, ButtonSVG} from "../Buttons";
 
 import tagIcon from "@/assets/tagIcon.svg";
 import editTag from "@/assets/editTag.svg";
@@ -35,7 +35,7 @@ const TagElement: React.FC<Props> = ({tag}) => {
           onMouseEnter={() => setHovering({...hovering, trash: true})}
           onMouseLeave={() => setHovering({...hovering, trash: false})}
         >
-          <ButtonSvg height={"25px"} hovered={hovering.trash} image={deleteTag} width={"25px"} />
+          <ButtonSVG height={"25px"} hovered={hovering.trash} image={deleteTag} width={"25px"} />
         </ButtonHover>
       ) : (
         <ButtonHover
@@ -45,7 +45,7 @@ const TagElement: React.FC<Props> = ({tag}) => {
           // onMouseEnter={() => setHovering({})}
           // onMouseLeave={() => setHovering(false)}
         >
-          <ButtonSvg height={"25px"} hovered={hovering.trash} image={tagIcon} width={"25px"} />
+          <ButtonSVG height={"25px"} hovered={hovering.trash} image={tagIcon} width={"25px"} />
         </ButtonHover>
       )}
 
@@ -70,7 +70,7 @@ const TagElement: React.FC<Props> = ({tag}) => {
         onMouseEnter={() => setHovering({...hovering, edit: true})}
         onMouseLeave={() => setHovering({...hovering, edit: false})}
       >
-        <ButtonSvg height={"25px"} hovered={hovering.edit} image={editTag} width={"25px"} />
+        <ButtonSVG height={"25px"} hovered={hovering.edit} image={editTag} width={"25px"} />
       </ButtonHover>
     </HStack>
   );
