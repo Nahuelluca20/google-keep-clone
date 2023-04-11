@@ -1,0 +1,77 @@
+import axios, {AxiosResponse} from "axios";
+
+import {Note} from "@/utilities";
+
+// Interface que define la estructura de una nota
+
+// URL base de la API
+const API_BASE_URL = "http://localhost:3001";
+
+// Función que maneja errores de Axios
+function handleAxiosError(error: any) {
+  console.error(error);
+  throw error;
+}
+
+// Función que realiza una petición GET para obtener todas las notas
+export async function getNotes(): Promise<Note[] | undefined> {
+  try {
+    const response: AxiosResponse<Note[]> = await axios.get(`${API_BASE_URL}/notes`);
+
+    return response.data;
+  } catch (error) {
+    handleAxiosError(error);
+  }
+}
+
+// Función que realiza una petición GET para obtener una nota por ID
+export async function getNoteById(id: number): Promise<Note | undefined> {
+  try {
+    const response: AxiosResponse<Note> = await axios.get(`${API_BASE_URL}/notes/${id}`);
+
+    return response.data;
+  } catch (error) {
+    handleAxiosError(error);
+  }
+}
+
+// Función que realiza una petición POST para crear una nueva nota
+export async function createNote(title: string, content: string): Promise<Note | undefined> {
+  try {
+    const response: AxiosResponse<Note> = await axios.post(`${API_BASE_URL}/notes`, {
+      title,
+      content,
+    });
+
+    return response.data;
+  } catch (error) {
+    handleAxiosError(error);
+  }
+}
+
+// Función que realiza una petición PUT para actualizar una nota existente
+export async function updateNote(
+  id: number,
+  title: string,
+  content: string,
+): Promise<Note | undefined> {
+  try {
+    const response: AxiosResponse<Note> = await axios.put(`${API_BASE_URL}/notes/${id}`, {
+      title,
+      content,
+    });
+
+    return response.data;
+  } catch (error) {
+    handleAxiosError(error);
+  }
+}
+
+// Función que realiza una petición DELETE para eliminar una nota existente
+export async function deleteNote(id: number): Promise<void> {
+  try {
+    await axios.delete(`${API_BASE_URL}/notes/${id}`);
+  } catch (error) {
+    handleAxiosError(error);
+  }
+}

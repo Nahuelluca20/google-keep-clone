@@ -18,6 +18,8 @@ const TagElement: React.FC<Props> = ({tag}) => {
     edit: false,
   });
 
+  const [tagValue, setTagValue] = useState(tag);
+
   return (
     <HStack
       alignItems={"center"}
@@ -38,13 +40,7 @@ const TagElement: React.FC<Props> = ({tag}) => {
           <ButtonSVG height={"25px"} hovered={hovering.trash} image={deleteTag} width={"25px"} />
         </ButtonHover>
       ) : (
-        <ButtonHover
-          bgColor="rgba(95,99,104,0.157)"
-          padding="1px"
-          tooltipText=""
-          // onMouseEnter={() => setHovering({})}
-          // onMouseLeave={() => setHovering(false)}
-        >
+        <ButtonHover bgColor="rgba(95,99,104,0.157)" padding="1px" tooltipText="">
           <ButtonSVG height={"25px"} hovered={hovering.trash} image={tagIcon} width={"25px"} />
         </ButtonHover>
       )}
@@ -59,8 +55,9 @@ const TagElement: React.FC<Props> = ({tag}) => {
         fontWeight={"500"}
         placeholder="Crear una nota..."
         py={"3px"}
-        value={tag}
+        value={tagValue}
         variant={"unstyled"}
+        onChange={(e) => setTagValue(e.target.value)}
       />
 
       <ButtonHover
