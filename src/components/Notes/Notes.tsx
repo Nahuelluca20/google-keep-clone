@@ -9,10 +9,13 @@ import Reminder from "@/assets/reminder-note.svg";
 import DotMenu from "@/assets/dotMenu.svg";
 import Arhive from "@/assets/archive-note.svg";
 
-export interface NotesProps {}
+export interface NotesProps {
+  content: string;
+  tags: string[];
+  title: string;
+}
 
-const Notes: React.FC<NotesProps> = () => {
-  const tagsNames = ["Meh", "importante", "no tan importante"];
+const Notes: React.FC<NotesProps> = ({tags, title, content}) => {
   const [checked, setChecked] = useState(false);
   const [hovering, setHovering] = useState(false);
 
@@ -34,7 +37,7 @@ const Notes: React.FC<NotesProps> = () => {
     >
       <HStack justifyContent={"space-between"}>
         <Text fontSize="18px" fontWeight={600}>
-          Hola
+          {title}
         </Text>
         <Box
           alignItems={"center"}
@@ -54,10 +57,10 @@ const Notes: React.FC<NotesProps> = () => {
         </Box>
       </HStack>
       <Text fontSize={"14px"} w={"100%"}>
-        sarasa sarasa sarasa sarasasarsarasasarsarasasar
+        {content}
       </Text>
       <Box display={"flex"} flexWrap="wrap">
-        {tagsNames.map((tag) => (
+        {tags.map((tag) => (
           <Tags key={tag} text={tag} />
         ))}
       </Box>

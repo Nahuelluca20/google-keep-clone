@@ -5,7 +5,7 @@ import {Note} from "@/utilities";
 // Interface que define la estructura de una nota
 
 // URL base de la API
-const API_BASE_URL = "http://localhost:3001";
+const API_BASE_URL = "https://web-production-6f63.up.railway.app";
 
 // Función que maneja errores de Axios
 function handleAxiosError(error: any) {
