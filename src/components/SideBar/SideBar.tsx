@@ -10,7 +10,7 @@ import EditSvg from "@/assets/edit.svg";
 import TagSvg from "@/assets/tag.svg";
 import TrashSvg from "@/assets/trash.svg";
 import ArchiveSvg from "@/assets/archive-note.svg";
-import {change, changeOpenMenuHover} from "@/redux/states/navbarState";
+import {change, changeOpenMenuHover} from "@/redux/slices/navbarSlice";
 import {RootState} from "@/redux";
 
 export interface SideBarProps {}

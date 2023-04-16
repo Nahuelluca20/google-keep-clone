@@ -1,17 +1,30 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {Stack, Spinner} from "@chakra-ui/react";
+import {useSelector} from "react-redux";
 
 import TagElement from "./TagElement";
 
-interface Props {}
+import {getTags} from "@/services";
+import {Tag} from "@/utilities";
 
-const Taglist: React.FC<Props> = ({}) => {
-  const tagExamples = [{name: "Trabajo"}, {name: "Estudio"}, {name: "Personal"}];
+interface Props {
+  tags: Tag[] | undefined;
+}
+
+const Taglist: React.FC<Props> = ({tags}) => {
+  console.log("esto son tag", tags);
+
+  // useEffect(() => {
+  //   getTagsApi();
+  // }, [setTags]);
 
   return (
     <>
-      {tagExamples.map((tag) => {
-        return <TagElement key={tag.name} tag={tag.name} />;
-      })}
+      <>
+        {tags?.map((tag) => {
+          return <TagElement key={tag._id} tag={tag.tagName} tagId={tag._id} />;
+        })}
+      </>
     </>
   );
 };

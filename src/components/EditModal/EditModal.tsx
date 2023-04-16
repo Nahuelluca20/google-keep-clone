@@ -12,11 +12,15 @@ import React from "react";
 
 import InputTag from "./InputTag";
 import Taglist from "./Taglist";
+
+import {useFetchTags} from "@/hooks";
 export interface EditModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 const EditModal: React.FC<EditModalProps> = ({isOpen, onClose}) => {
+  const {tags} = useFetchTags();
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -29,7 +33,7 @@ const EditModal: React.FC<EditModalProps> = ({isOpen, onClose}) => {
           </ModalHeader>
           <ModalBody px={"15px"}>
             <InputTag />
-            <Taglist />
+            <Taglist tags={tags} />
           </ModalBody>
 
           <ModalFooter>

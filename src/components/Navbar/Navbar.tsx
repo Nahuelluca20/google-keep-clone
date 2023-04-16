@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {SearchBar} from "../SearchBar";
 
 import keepLogo from "@/assets/keepLogo.png";
-import {changeOpenMenu} from "@/redux/states/navbarState";
+import {changeOpenMenu} from "@/redux/slices/navbarSlice";
 import {RootState} from "@/redux";
 
 export interface NavbarProps {}

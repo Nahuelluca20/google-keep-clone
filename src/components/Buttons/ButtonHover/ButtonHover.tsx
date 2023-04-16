@@ -7,6 +7,7 @@ export interface ButtonHoverProps {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   tooltipText?: string;
+  onClick?: () => void;
 }
 
 const ButtonHover: React.FC<ButtonHoverProps> = ({
@@ -16,6 +17,7 @@ const ButtonHover: React.FC<ButtonHoverProps> = ({
   onMouseLeave,
   onMouseEnter,
   tooltipText,
+  onClick,
 }) => {
   return (
     <Tooltip
@@ -31,6 +33,7 @@ const ButtonHover: React.FC<ButtonHoverProps> = ({
         borderRadius={"full"}
         cursor={"pointer"}
         p={padding}
+        onClick={onClick}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >

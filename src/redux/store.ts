@@ -1,10 +1,12 @@
 import {configureStore} from "@reduxjs/toolkit";
 
-import {navbarReducer} from "./states";
+import {navbarReducer, tagReducer, uiReducer} from "./slices";
 
 export const store = configureStore({
   reducer: {
     navbar: navbarReducer,
+    tag: tagReducer,
+    ui: uiReducer,
   },
 });
 

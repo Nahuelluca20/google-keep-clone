@@ -3,7 +3,7 @@ import {ReactSVG} from "react-svg";
 import {useSelector, useDispatch} from "react-redux";
 
 import {RootState} from "@/redux";
-import {change} from "@/redux/states/navbarState";
+import {change} from "@/redux/slices/navbarSlice";
 
 export interface ButtonNavSVGProps {
   image: string;
