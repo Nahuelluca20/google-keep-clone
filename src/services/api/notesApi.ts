@@ -14,29 +14,31 @@ function handleAxiosError(error: any) {
 }
 
 // Función que realiza una petición GET para obtener todas las notas
-export async function getNotes(): Promise<Note[] | undefined> {
+export async function getNotes(): Promise<Note[]> {
   try {
     const response: AxiosResponse<Note[]> = await axios.get(`${API_BASE_URL}/notes`);
 
     return response.data;
   } catch (error) {
     handleAxiosError(error);
+    throw error;
   }
 }
 
 // Función que realiza una petición GET para obtener una nota por ID
-export async function getNoteById(id: number): Promise<Note | undefined> {
+export async function getNoteById(id: number): Promise<Note> {
   try {
     const response: AxiosResponse<Note> = await axios.get(`${API_BASE_URL}/notes/${id}`);
 
     return response.data;
   } catch (error) {
     handleAxiosError(error);
+    throw error;
   }
 }
 
 // Función que realiza una petición POST para crear una nueva nota
-export async function createNote(title: string, content: string): Promise<Note | undefined> {
+export async function createNote(title: string, content: string): Promise<Note> {
   try {
     const response: AxiosResponse<Note> = await axios.post(`${API_BASE_URL}/notes`, {
       title,
@@ -46,15 +48,12 @@ export async function createNote(title: string, content: string): Promise<Note |
     return response.data;
   } catch (error) {
     handleAxiosError(error);
+    throw error;
   }
 }
 
 // Función que realiza una petición PUT para actualizar una nota existente
-export async function updateNote(
-  id: number,
-  title: string,
-  content: string,
-): Promise<Note | undefined> {
+export async function updateNote(id: number, title: string, content: string): Promise<Note> {
   try {
     const response: AxiosResponse<Note> = await axios.put(`${API_BASE_URL}/notes/${id}`, {
       title,
@@ -64,6 +63,7 @@ export async function updateNote(
     return response.data;
   } catch (error) {
     handleAxiosError(error);
+    throw error;
   }
 }
 
@@ -73,5 +73,6 @@ export async function deleteNote(id: number): Promise<void> {
     await axios.delete(`${API_BASE_URL}/notes/${id}`);
   } catch (error) {
     handleAxiosError(error);
+    throw error;
   }
 }

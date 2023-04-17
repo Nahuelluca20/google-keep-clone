@@ -1,10 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Stack, Spinner} from "@chakra-ui/react";
-import {useSelector} from "react-redux";
-
 import TagElement from "./TagElement";
 
-import {getTags} from "@/services";
 import {Tag} from "@/utilities";
 
 interface Props {
@@ -12,12 +7,6 @@ interface Props {
 }
 
 const Taglist: React.FC<Props> = ({tags}) => {
-  console.log("esto son tag", tags);
-
-  // useEffect(() => {
-  //   getTagsApi();
-  // }, [setTags]);
-
   return (
     <>
       <>

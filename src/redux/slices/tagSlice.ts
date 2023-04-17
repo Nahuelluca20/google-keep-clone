@@ -3,7 +3,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {setLoading} from "./uiSlice";
 
 import {Tag} from "@/utilities";
-import {getTags, createTag as createTagApi, deleteTag as deleteTagApi} from "@/services";
+import {getTags, createTag as createTagApi, deleteTag, updateTag} from "@/services";
 
 interface TagState {
   tags: Tag[];
@@ -29,9 +29,15 @@ const createTag = createAsyncThunk("users/createTags", async (tagName: string) =
 });
 
 const deleteTagById = createAsyncThunk("tags/deleteTag", async (id: number) => {
-  await deleteTagApi(id);
+  await deleteTag(id);
 
   return id;
+});
+
+const updateTagById = createAsyncThunk("tags/updateTag", async (tag: Tag) => {
+  const tagRes = await updateTag(tag._id, tag.tagName);
+
+  return tagRes;
 });
 
 const tagSlice = createSlice({
@@ -59,10 +65,21 @@ const tagSlice = createSlice({
 
       state.tags = state.tags.filter((tag) => tag._id !== idToDelete);
     });
+    builder.addCase(updateTagById.fulfilled, (state, action) => {
+      const updatedTag = action.payload;
+
+      state.tags = state.tags.map((tag) => {
+        if (tag._id === updatedTag._id) {
+          return updatedTag;
+        }
+
+        return tag;
+      });
+    });
   },
 });
 
-export {createTag, deleteTagById};
+export {createTag, deleteTagById, updateTagById};
 
 export const {addTag, addTags} = tagSlice.actions;
 

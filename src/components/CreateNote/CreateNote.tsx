@@ -13,6 +13,8 @@ export interface CreateNoteProps {}
 const CreateNote: React.FC<CreateNoteProps> = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [titleValue, setTitleValue] = useState("");
+  const [contentValue, setContentValue] = useState("");
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -38,7 +40,13 @@ const CreateNote: React.FC<CreateNoteProps> = () => {
       <HStack>
         {isOpen && (
           <>
-            <Input _placeholder={{fontSize: "1rem"}} placeholder="Título" variant={"unstyled"} />
+            <Input
+              _placeholder={{fontSize: "1rem"}}
+              placeholder="Título"
+              value={titleValue}
+              variant={"unstyled"}
+              onChange={(e) => setTitleValue(e.target.value)}
+            />
             <Box
               alignItems={"center"}
               borderRadius={"full"}
@@ -70,7 +78,9 @@ const CreateNote: React.FC<CreateNoteProps> = () => {
             _placeholder={{fontSize: "14px"}}
             placeholder="Crear una nota..."
             py={"12px"}
+            value={contentValue}
             variant={"unstyled"}
+            onChange={(e) => setContentValue(e.target.value)}
           />
           <HStack justifyContent="space-between" pb={1}>
             <HStack spacing={[5, 10]}>

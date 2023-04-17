@@ -7,3 +7,6 @@ export {default as createTag} from "./tagSlice";
 
 export {default as uiState} from "./uiSlice";
 export {default as uiReducer} from "./uiSlice";
+
+export {default as notesState} from "./notesSlice";
+export {default as notesReducer} from "./notesSlice";

@@ -1,9 +1,10 @@
 import {configureStore} from "@reduxjs/toolkit";
 
-import {navbarReducer, tagReducer, uiReducer} from "./slices";
+import {navbarReducer, notesReducer, tagReducer, uiReducer} from "./slices";
 
 export const store = configureStore({
   reducer: {
+    notes: notesReducer,
     navbar: navbarReducer,
     tag: tagReducer,
     ui: uiReducer,

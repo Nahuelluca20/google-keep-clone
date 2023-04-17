@@ -53,10 +53,10 @@ export async function createTag(tagName: string): Promise<Tag> {
 }
 
 // Función que realiza una petición PUT para actualizar un tag existente
-export async function updateTag(id: number, name: string): Promise<Tag> {
+export async function updateTag(id: number, tagName: string): Promise<Tag> {
   try {
     const response: AxiosResponse<Tag> = await axios.put(`${API_BASE_URL}/${id}`, {
-      name,
+      tagName,
     });
 
     return response.data;

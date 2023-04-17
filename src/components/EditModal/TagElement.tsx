@@ -9,7 +9,7 @@ import editTag from "@/assets/editTag.svg";
 import deleteTag from "@/assets/deleteTag.svg";
 import addTag from "@/assets/addTag-colored.svg";
 import {AppDispatch} from "@/redux";
-import {deleteTagById} from "@/redux/slices/tagSlice";
+import {deleteTagById, updateTagById} from "@/redux/slices/tagSlice";
 
 interface Props {
   tag: string;
@@ -29,6 +29,15 @@ const TagElement: React.FC<Props> = ({tag, tagId}) => {
   const handleDeleteClick = async (tagId: number) => {
     try {
       await dispatch(deleteTagById(tagId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleEditClick = async (tagId: number) => {
+    try {
+      console.log(tagId, tagValue);
+      await dispatch(updateTagById({_id: tagId, tagName: tagValue}));
     } catch (error) {
       console.log(error);
     }
@@ -79,8 +88,8 @@ const TagElement: React.FC<Props> = ({tag, tagId}) => {
         <ButtonHover
           bgColor="rgba(95,99,104,0.157)"
           padding="1px"
-          tooltipText="Eliminar etiqueta"
-          // onClick={() => handleDeleteClick(tagId)}
+          tooltipText="Editar etiqueta"
+          onClick={() => handleEditClick(tagId)}
           onMouseEnter={() => setHovering({...hovering, edit: true})}
           onMouseLeave={() => setHovering({...hovering, edit: false})}
         >
