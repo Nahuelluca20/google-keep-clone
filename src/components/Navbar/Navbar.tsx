@@ -7,12 +7,15 @@ import {SearchBar} from "../SearchBar";
 import keepLogo from "@/assets/keepLogo.png";
 import {changeOpenMenu} from "@/redux/slices/navbarSlice";
 import {RootState} from "@/redux";
+import {useFetchTags} from "@/hooks";
+import {Tag} from "@/utilities";
 
 export interface NavbarProps {}
 
 const Navbar: React.FC<NavbarProps> = () => {
   const nav = useSelector((state: RootState) => state.navbar.value);
   const dispatch = useDispatch();
+  const {tags} = useFetchTags();
 
   return (
     <Flex alignItems={"center"} bg="white" boxShadow="md" px="3" py={["1", "3"]}>
@@ -35,9 +38,21 @@ const Navbar: React.FC<NavbarProps> = () => {
         </>
       ) : (
         <Box fontSize="lg" fontWeight="bold" ml={2}>
-          <Text color={"brand.700"} fontSize={"22px"} fontWeight={"400"}>
+          <Text
+            color={"brand.700"}
+            fontSize={"22px"}
+            fontWeight={"400"}
+            maxW={"200px"}
+            minW={"200px"}
+            overflow={"hidden"}
+            textOverflow={"ellipsis"}
+            whiteSpace={"nowrap"}
+          >
             {nav === "reminder" && "Recordatorios"}
             {nav === "tag" && "Importante"}
+            {tags.map((tag: Tag) => {
+              return nav === tag.tagName && tag.tagName;
+            })}
             {nav === "edit" && "Editar"}
             {nav === "archive" && "Archivados"}
             {nav === "trash" && "Papelera"}

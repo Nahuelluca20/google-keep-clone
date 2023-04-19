@@ -1,12 +1,17 @@
+import {error} from "console";
+
 import {Input, Image, Text, HStack, Stack, Box, Button} from "@chakra-ui/react";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {ReactSVG} from "react-svg";
+import {useDispatch, useSelector} from "react-redux";
 
 import PinSvg from "@/assets/pin.svg";
 import PinedSvg from "@/assets/pined.svg";
 import Reminder from "@/assets/reminder-note.svg";
 import DotMenu from "@/assets/dotMenu.svg";
 import Arhive from "@/assets/archive-note.svg";
+import {createNote as createNoteApi} from "@/redux/slices/notesSlice";
+import {AppDispatch, RootState} from "@/redux";
 
 export interface CreateNoteProps {}
 
@@ -14,7 +19,11 @@ const CreateNote: React.FC<CreateNoteProps> = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [checked, setChecked] = useState(false);
   const [titleValue, setTitleValue] = useState("");
+  const [tagsValues, settagsValues] = useState<string[]>([]);
   const [contentValue, setContentValue] = useState("");
+  const noteRef = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch<AppDispatch>();
+  const nav = useSelector((state: RootState) => state.navbar.value);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -24,8 +33,48 @@ const CreateNote: React.FC<CreateNoteProps> = () => {
     setChecked(!checked);
   };
 
+  const handleClickOutside = async (event: MouseEvent) => {
+    if (
+      noteRef.current &&
+      !noteRef.current.contains(event.target as Node) &&
+      (titleValue || contentValue)
+    ) {
+      try {
+        await dispatch(
+          createNoteApi({
+            title: titleValue,
+            content: contentValue,
+            tags: tagsValues,
+          }),
+        );
+        await setContentValue("");
+        await setTitleValue("");
+        await setIsOpen(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (nav === ("notes" || "archive" || "trash" || "edit" || "reminder")) {
+      return;
+    } else {
+      settagsValues([...tagsValues, nav]);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [titleValue, contentValue]);
+
   return (
     <Stack
+      ref={noteRef}
       border={"1px solid transparent"}
       borderRadius={"8px"}
       boxShadow={"0 1px 2px 0 rgba(60,64,67,0.302), 0 2px 6px 2px rgba(60,64,67,0.149)"}

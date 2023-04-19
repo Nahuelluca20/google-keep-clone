@@ -38,11 +38,14 @@ export async function getNoteById(id: number): Promise<Note> {
 }
 
 // Función que realiza una petición POST para crear una nueva nota
-export async function createNote(title: string, content: string): Promise<Note> {
+export async function createNote(title: string, content: string, tags: string[]): Promise<Note> {
   try {
     const response: AxiosResponse<Note> = await axios.post(`${API_BASE_URL}/notes`, {
       title,
       content,
+      tags: tags ?? [],
+      reminder: "n",
+      archived: false,
     });
 
     return response.data;

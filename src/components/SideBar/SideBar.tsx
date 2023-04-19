@@ -12,6 +12,8 @@ import TrashSvg from "@/assets/trash.svg";
 import ArchiveSvg from "@/assets/archive-note.svg";
 import {change, changeOpenMenuHover} from "@/redux/slices/navbarSlice";
 import {RootState} from "@/redux";
+import {useFetchTags} from "@/hooks";
+import {Tag} from "@/utilities";
 
 export interface SideBarProps {}
 
@@ -20,6 +22,7 @@ const SideBar: React.FC<SideBarProps> = () => {
   const nav = useSelector((state: RootState) => state.navbar.value);
   const openMenu = useSelector((state: RootState) => state.navbar.openMenu);
   const dispatch = useDispatch();
+  const {tags} = useFetchTags();
   const handleColorChange = (value: string) => {
     dispatch(change(value));
   };
@@ -27,7 +30,13 @@ const SideBar: React.FC<SideBarProps> = () => {
   const menuOptions = [
     {textContent: "Notas", name: "notes", image: NotesSvg},
     {textContent: "Recordatorios", name: "reminder", image: ReminderSvg},
-    {textContent: "Importante", name: "tag", image: TagSvg},
+    ...tags.map((tag: Tag) => {
+      return {
+        textContent: tag.tagName,
+        name: tag.tagName,
+        image: TagSvg,
+      };
+    }),
     {
       textContent: "Editar",
       image: EditSvg,
@@ -92,6 +101,10 @@ const SideBar: React.FC<SideBarProps> = () => {
                 color={nav === option.name ? "#202124" : "#5f6368"}
                 display={openMenu ? "block" : "none"}
                 fontWeight={"500"}
+                maxW={"190px"}
+                overflow={"hidden"}
+                textOverflow={"ellipsis"}
+                whiteSpace={"nowrap"}
               >
                 {option.textContent}
               </Text>

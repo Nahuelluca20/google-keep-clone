@@ -24,8 +24,8 @@ export const fetchNotes = createAsyncThunk("notes/fetchNotes", async (_, {dispat
 
 const createNote = createAsyncThunk(
   "notes/createNote",
-  async ({title, content}: {title: string; content: string}) => {
-    const noteRes = await createNoteApi(title, content);
+  async (note: {title: string; content: string; tags: string[]}) => {
+    const noteRes = await createNoteApi(note.title, note.content, note.tags);
 
     return noteRes;
   },
