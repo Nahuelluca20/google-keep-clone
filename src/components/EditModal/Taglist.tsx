@@ -9,11 +9,9 @@ interface Props {
 const Taglist: React.FC<Props> = ({tags}) => {
   return (
     <>
-      <>
-        {tags?.map((tag) => {
-          return <TagElement key={tag._id} tag={tag.tagName} tagId={tag._id} />;
-        })}
-      </>
+      {tags?.map((tag) => {
+        return <TagElement key={tag._id} tag={tag.tagName} tagId={tag._id} />;
+      })}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import {HStack, Stack, Text} from "@chakra-ui/react";
-import {useSelector, useDispatch} from "react-redux";
+import {useSelector, useDispatch, shallowEqual} from "react-redux";
 import {useState} from "react";
 
 import {ButtonNavSVG} from "@/components";
@@ -12,7 +12,6 @@ import TrashSvg from "@/assets/trash.svg";
 import ArchiveSvg from "@/assets/archive-note.svg";
 import {change, changeOpenMenuHover} from "@/redux/slices/navbarSlice";
 import {RootState} from "@/redux";
-import {useFetchTags} from "@/hooks";
 import {Tag} from "@/utilities";
 
 export interface SideBarProps {}
@@ -22,7 +21,8 @@ const SideBar: React.FC<SideBarProps> = () => {
   const nav = useSelector((state: RootState) => state.navbar.value);
   const openMenu = useSelector((state: RootState) => state.navbar.openMenu);
   const dispatch = useDispatch();
-  const {tags} = useFetchTags();
+  const tags = useSelector((state: any) => state.tag.tags, shallowEqual);
+
   const handleColorChange = (value: string) => {
     dispatch(change(value));
   };

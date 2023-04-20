@@ -42,9 +42,9 @@ export async function createNote(title: string, content: string, tags: string[])
   try {
     const response: AxiosResponse<Note> = await axios.post(`${API_BASE_URL}/notes`, {
       title,
-      content,
+      content: content ?? "",
       tags: tags ?? [],
-      reminder: "n",
+      reminder: "",
       archived: false,
     });
 

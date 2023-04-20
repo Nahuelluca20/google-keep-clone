@@ -9,17 +9,17 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
+import {shallowEqual, useSelector} from "react-redux";
 
 import InputTag from "./InputTag";
 import Taglist from "./Taglist";
 
-import {useFetchTags} from "@/hooks";
 export interface EditModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 const EditModal: React.FC<EditModalProps> = ({isOpen, onClose}) => {
-  const {tags} = useFetchTags();
+  const tags = useSelector((state: any) => state.tag.tags, shallowEqual);
 
   return (
     <>

@@ -32,7 +32,13 @@ const TagPage: React.FC<TagPageProps> = ({tagName}) => {
           {notes
             ?.filter((note: Note) => note.tags.includes(tagName))
             .map((note: Note) => (
-              <Notes key={note._id} content={note.content} tags={note.tags} title={note.title} />
+              <Notes
+                key={note._id}
+                content={note.content}
+                id={note._id}
+                tags={note.tags}
+                title={note.title}
+              />
             ))}
         </Flex>
       )}
