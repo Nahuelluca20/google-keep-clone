@@ -23,6 +23,9 @@ export const navbarSlice = createSlice({
     changeOpenMenu: (state) => {
       state.openMenu = !state.openMenu;
     },
+    closeMenu: (state) => {
+      state.openMenu = false;
+    },
     changeOpenMenuHover: (state, action: PayloadAction<boolean>) => {
       state.openMenu = action.payload;
     },
@@ -30,6 +33,6 @@ export const navbarSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const {changeOpenMenu, changeOpenMenuHover, change} = navbarSlice.actions;
+export const {changeOpenMenu, changeOpenMenuHover, change, closeMenu} = navbarSlice.actions;
 
 export default navbarSlice.reducer;

@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {SearchBar} from "../SearchBar";
 
 import keepLogo from "@/assets/keepLogo.png";
-import {changeOpenMenu} from "@/redux/slices/navbarSlice";
+import {closeMenu} from "@/redux/slices/navbarSlice";
 import {RootState} from "@/redux";
 import {useFetchTags} from "@/hooks";
 import {Tag} from "@/utilities";
@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = () => {
         aria-label="Menu"
         icon={<HamburgerIcon color="brand.700" h={[5, 6]} w={[5, 6]} />}
         variant="ghost"
-        onClick={() => dispatch(changeOpenMenu())}
+        onClick={() => dispatch(closeMenu())}
       />
 
       {nav === "notes" ? (

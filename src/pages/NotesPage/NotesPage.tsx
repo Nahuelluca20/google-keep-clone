@@ -23,7 +23,7 @@ const NotesPage: React.FC<NotesPageProps> = () => {
           />
         </Stack>
       ) : (
-        <Flex display={"flex"} flexWrap="wrap" py={"16px"}>
+        <Flex display={"flex"} flexWrap="wrap" py={"16px"} w={"100%"}>
           {notes?.map((note: Note) => (
             <Notes
               key={note._id}
