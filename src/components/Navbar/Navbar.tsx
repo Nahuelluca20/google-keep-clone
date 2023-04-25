@@ -61,7 +61,6 @@ const Navbar: React.FC<NavbarProps> = () => {
       )}
 
       <SearchBar />
-      {/* <Input mx="2" placeholder="Search" size="md" variant="filled" /> */}
       <Avatar
         h={["32px", "42px"]}
         mx="2"

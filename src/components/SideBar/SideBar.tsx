@@ -51,7 +51,7 @@ const SideBar: React.FC<SideBarProps> = () => {
       <HStack
         bgColor={openMenu ? "white" : "transparent"}
         h={"100vh"}
-        position={"fixed"}
+        position={{base: "fixed", md: "sticky"}}
         top={["50px", "70px"]}
         zIndex={4}
         onMouseEnter={() => dispatch(changeOpenMenuHover(true))}

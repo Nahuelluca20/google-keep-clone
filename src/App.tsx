@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <HStack>
+      <HStack alignItems={"start"}>
         <SideBar />
         <Layout>
           {nav === "notes" && <NotesPage />}

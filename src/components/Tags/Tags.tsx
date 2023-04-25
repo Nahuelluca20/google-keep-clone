@@ -2,12 +2,16 @@ import {Text, Box, IconButton} from "@chakra-ui/react";
 import {CloseIcon} from "@chakra-ui/icons";
 import {useState} from "react";
 
+import {deleteTagById} from "@/redux/slices/tagSlice";
+
 export interface TagsProps {
   text: string;
+  id: number;
 }
 
-const Tags: React.FC<TagsProps> = ({text}) => {
+const Tags: React.FC<TagsProps> = ({text, id}) => {
   const [hovering, setHovering] = useState(false);
+  const handleDelete = async () => await deleteTagById(id);
 
   return (
     <Box alignItems={"center"} display={"flex"} m={1} maxWidth={"100%"}>
@@ -33,11 +37,12 @@ const Tags: React.FC<TagsProps> = ({text}) => {
           aria-label="Cerrar"
           icon={<CloseIcon h={"8px"} w={"8px"} />}
           ml={"-25px"}
-          pointerEvents="none"
           right="0"
           size={"xs"}
           variant={"unstyled"}
-          onClick={() => setHovering(false)}
+          onClick={() => handleDelete}
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
           onMouseOver={(e) => e.stopPropagation()}
         />
       )}

@@ -28,7 +28,7 @@ const TagPage: React.FC<TagPageProps> = ({tagName}) => {
           />
         </Stack>
       ) : (
-        <Flex display={"flex"} flexWrap="wrap" py={"16px"}>
+        <Flex display={"flex"} flexWrap="wrap" py={"16px"} width={"100%"}>
           {notes
             ?.filter((note: Note) => note.tags.includes(tagName))
             .map((note: Note) => (

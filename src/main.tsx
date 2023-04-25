@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import {extendTheme} from "@chakra-ui/react";
 import {Provider} from "react-redux";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 import App from "./App";
 
@@ -25,12 +26,21 @@ const theme = extendTheme({
   },
 });
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <ChakraProvider theme={theme}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </ChakraProvider>
+    ),
+  },
+]);
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </ChakraProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 );

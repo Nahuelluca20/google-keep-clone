@@ -8,6 +8,8 @@ export interface NotesPageProps {}
 const NotesPage: React.FC<NotesPageProps> = () => {
   const {notes, loading} = useFetchNotes();
 
+  console.log(notes);
+
   return (
     <Stack alignItems="center" pt={3} width={"100%"}>
       <CreateNote />

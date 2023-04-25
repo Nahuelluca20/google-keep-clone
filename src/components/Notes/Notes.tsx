@@ -89,9 +89,9 @@ const Notes: React.FC<NotesProps> = ({tags, title, content, id}) => {
         {content}
       </Text>
       <Box display={"flex"} flexWrap="wrap">
-        {tags.map((tag) => (
-          <Tags key={tag} text={tag} />
-        ))}
+        {/* {tags.map((tag) => (
+          <Tags key={tag} text={tag} id={tag.}/>
+        ))} */}
       </Box>
 
       <HStack

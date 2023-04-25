@@ -24,7 +24,7 @@ export const navbarSlice = createSlice({
       state.openMenu = !state.openMenu;
     },
     closeMenu: (state) => {
-      state.openMenu = false;
+      state.openMenu = state.openMenu ? false : true;
     },
     changeOpenMenuHover: (state, action: PayloadAction<boolean>) => {
       state.openMenu = action.payload;
