@@ -3,7 +3,13 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {setLoading} from "./uiSlice";
 
 import {Note} from "@/utilities";
-import {getNotes, createNote as createNoteApi, deleteNote, updateNote} from "@/services";
+import {
+  getNotes,
+  createNote as createNoteApi,
+  deleteNote,
+  updateNote,
+  deleteTagFromNote,
+} from "@/services";
 
 interface NoteState {
   notes: Note[];
@@ -24,7 +30,7 @@ export const fetchNotes = createAsyncThunk("notes/fetchNotes", async (_, {dispat
 
 const createNote = createAsyncThunk(
   "notes/createNote",
-  async (note: {title: string; content: string; tags: string[]}) => {
+  async (note: {title: string; content: string; tags: any}) => {
     const noteRes = await createNoteApi(note.title, note.content, note.tags);
 
     return noteRes;
@@ -43,6 +49,15 @@ const updateNoteById = createAsyncThunk(
     const noteRes = await updateNote(id, title, content);
 
     return noteRes;
+  },
+);
+
+const deleteTagFromNoteById = createAsyncThunk(
+  "notes/deleteTagFromNote",
+  async ({id, tagId}: {id: number; tagId: number}) => {
+    await deleteTagFromNote(id, tagId);
+
+    return {id, tagId};
   },
 );
 
@@ -71,6 +86,19 @@ const noteSlice = createSlice({
 
       state.notes = state.notes.filter((note) => note._id !== idToDelete);
     });
+    builder.addCase(deleteTagFromNoteById.fulfilled, (state, action) => {
+      const {id, tagId} = action.payload;
+
+      state.notes = state.notes.map((note) => {
+        if (note._id === id) {
+          const updatedTags = note.tags.filter((tag) => tag._id !== tagId);
+
+          return {...note, tags: updatedTags};
+        }
+
+        return note;
+      });
+    });
     builder.addCase(updateNoteById.fulfilled, (state, action) => {
       const updatedNote = action.payload;
 
@@ -85,7 +113,7 @@ const noteSlice = createSlice({
   },
 });
 
-export {createNote, deleteNoteById, updateNoteById};
+export {createNote, deleteNoteById, updateNoteById, deleteTagFromNoteById};
 
 export const {addNote, addNotes} = noteSlice.actions;
 

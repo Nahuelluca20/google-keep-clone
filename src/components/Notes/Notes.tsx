@@ -9,16 +9,10 @@ import {
   MenuItem,
   MenuList,
   Portal,
-  Input,
-  Button,
-  InputGroup,
-  InputRightElement,
-  IconButton,
 } from "@chakra-ui/react";
 import {useState} from "react";
 import {ReactSVG} from "react-svg";
 import {useDispatch} from "react-redux";
-import {SearchIcon} from "@chakra-ui/icons";
 
 import MenuTagsCheckBoxes from "./MenuTagsCheckBoxes";
 
@@ -30,10 +24,11 @@ import DotMenu from "@/assets/dotMenu.svg";
 import Arhive from "@/assets/archive-note.svg";
 import {deleteNoteById} from "@/redux/slices/notesSlice";
 import {AppDispatch} from "@/redux";
+import {Tag} from "@/utilities";
 
 export interface NotesProps {
   content: string;
-  tags: string[];
+  tags: Tag[];
   title: string;
   id: number;
 }
@@ -89,9 +84,9 @@ const Notes: React.FC<NotesProps> = ({tags, title, content, id}) => {
         {content}
       </Text>
       <Box display={"flex"} flexWrap="wrap">
-        {/* {tags.map((tag) => (
-          <Tags key={tag} text={tag} id={tag.}/>
-        ))} */}
+        {tags.map((tag) => (
+          <Tags key={tag._id} id={tag._id} noteId={id} text={tag.tagName} />
+        ))}
       </Box>
 
       <HStack

@@ -6,7 +6,7 @@ import {shallowEqual, useSelector} from "react-redux";
 import {Tag} from "@/utilities";
 
 interface Props {
-  tagsProps: string[];
+  tagsProps: Tag[];
 }
 
 const MenuTagsCheckBoxes: React.FC<Props> = ({tagsProps}) => {
@@ -39,7 +39,11 @@ const MenuTagsCheckBoxes: React.FC<Props> = ({tagsProps}) => {
           {tags
             .filter((tag: Tag) => tag.tagName.includes(inputValue))
             .map((tag: Tag) => (
-              <Checkbox key={tag._id} defaultChecked={tagsProps.includes(tag.tagName)} size="sm">
+              <Checkbox
+                key={tag._id}
+                defaultChecked={tagsProps.some((t) => t.tagName === tag.tagName)}
+                size="sm"
+              >
                 {tag.tagName}
               </Checkbox>
             ))}

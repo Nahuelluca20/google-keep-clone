@@ -23,7 +23,9 @@ function App() {
           {nav === "trash" && <TrashPage />}
           {nav === "edit" && <EditPage />}
           {tags.map((tag: Tag) => {
-            return nav === tag.tagName && <TagPage key={tag._id} tagName={tag.tagName} />;
+            return (
+              nav === tag.tagName && <TagPage key={tag._id} tagId={tag._id} tagName={tag.tagName} />
+            );
           })}
         </Layout>
       </HStack>

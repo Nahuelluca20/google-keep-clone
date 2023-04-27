@@ -1,5 +1,3 @@
-import {match} from "assert";
-
 import {Flex, Spinner, Stack} from "@chakra-ui/react";
 
 import {CreateNote, Notes} from "@/components";
@@ -8,14 +6,17 @@ import {useFetchNotes} from "@/hooks";
 
 export interface TagPageProps {
   tagName: string;
+  tagId: number;
 }
 
-const TagPage: React.FC<TagPageProps> = ({tagName}) => {
+const TagPage: React.FC<TagPageProps> = ({tagName, tagId}) => {
   const {notes, loading} = useFetchNotes();
+
+  console.log(notes);
 
   return (
     <Stack alignItems="center" pt={3} width={"100%"}>
-      <CreateNote />
+      <CreateNote tagId={tagId} />
       {loading ? (
         <Stack>
           <Spinner
@@ -30,7 +31,7 @@ const TagPage: React.FC<TagPageProps> = ({tagName}) => {
       ) : (
         <Flex display={"flex"} flexWrap="wrap" py={"16px"} width={"100%"}>
           {notes
-            ?.filter((note: Note) => note.tags.includes(tagName))
+            ?.filter((note: Note) => note.tags.map((tag) => tag.tagName).includes(tagName))
             .map((note: Note) => (
               <Notes
                 key={note._id}

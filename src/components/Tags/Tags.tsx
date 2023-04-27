@@ -1,17 +1,29 @@
 import {Text, Box, IconButton} from "@chakra-ui/react";
 import {CloseIcon} from "@chakra-ui/icons";
 import {useState} from "react";
+import {useDispatch} from "react-redux";
 
-import {deleteTagById} from "@/redux/slices/tagSlice";
+import {AppDispatch} from "@/redux";
+import {deleteTagFromNoteById} from "@/redux/slices/notesSlice";
 
 export interface TagsProps {
   text: string;
   id: number;
+  noteId: number;
 }
 
-const Tags: React.FC<TagsProps> = ({text, id}) => {
+const Tags: React.FC<TagsProps> = ({text, id, noteId}) => {
   const [hovering, setHovering] = useState(false);
-  const handleDelete = async () => await deleteTagById(id);
+  const dispatch = useDispatch<AppDispatch>();
+  const iDs = {id: noteId, tagId: id};
+
+  const handleDelete = async () => {
+    try {
+      await dispatch(deleteTagFromNoteById(iDs));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box alignItems={"center"} display={"flex"} m={1} maxWidth={"100%"}>
@@ -40,7 +52,7 @@ const Tags: React.FC<TagsProps> = ({text, id}) => {
           right="0"
           size={"xs"}
           variant={"unstyled"}
-          onClick={() => handleDelete}
+          onClick={() => handleDelete()}
           onMouseEnter={() => setHovering(true)}
           onMouseLeave={() => setHovering(false)}
           onMouseOver={(e) => e.stopPropagation()}

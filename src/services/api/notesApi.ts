@@ -79,3 +79,11 @@ export async function deleteNote(id: number): Promise<void> {
     throw error;
   }
 }
+
+export async function deleteTagFromNote(id: number, tagId: number): Promise<void> {
+  try {
+    await axios.delete(`${API_BASE_URL}/notes/${id}/tag/${tagId}`);
+  } catch (error) {
+    handleAxiosError(error);
+  }
+}

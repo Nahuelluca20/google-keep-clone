@@ -10,12 +10,14 @@ import PinedSvg from "@/assets/pined.svg";
 import Reminder from "@/assets/reminder-note.svg";
 import DotMenu from "@/assets/dotMenu.svg";
 import Arhive from "@/assets/archive-note.svg";
-import {createNote as createNoteApi} from "@/redux/slices/notesSlice";
+import {createNote as createNoteApi, fetchNotes} from "@/redux/slices/notesSlice";
 import {AppDispatch, RootState} from "@/redux";
 
-export interface CreateNoteProps {}
+export interface CreateNoteProps {
+  tagId: number | undefined;
+}
 
-const CreateNote: React.FC<CreateNoteProps> = () => {
+const CreateNote: React.FC<CreateNoteProps> = ({tagId}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [checked, setChecked] = useState(false);
   const [titleValue, setTitleValue] = useState("");
@@ -44,7 +46,7 @@ const CreateNote: React.FC<CreateNoteProps> = () => {
           createNoteApi({
             title: titleValue,
             content: contentValue,
-            tags: tagsValues,
+            tags: tagId === undefined ? [] : tagId,
           }),
         );
         await setContentValue("");
