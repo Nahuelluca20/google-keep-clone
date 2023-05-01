@@ -87,3 +87,13 @@ export async function deleteTagFromNote(id: number, tagId: number): Promise<void
     handleAxiosError(error);
   }
 }
+
+export async function addTagsToNote(id: number, tagId: number): Promise<void> {
+  try {
+    await axios.post(`${API_BASE_URL}/notes/${id}/tags`, {
+      tags: [tagId],
+    });
+  } catch (error) {
+    handleAxiosError(error);
+  }
+}

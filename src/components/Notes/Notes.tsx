@@ -106,7 +106,7 @@ const Notes: React.FC<NotesProps> = ({tags, title, content, id}) => {
               <MenuList w={"225px"}>
                 {showTags ? (
                   <>
-                    <MenuTagsCheckBoxes tagsProps={tags} />
+                    <MenuTagsCheckBoxes noteId={id} tagsProps={tags} />
                   </>
                 ) : (
                   <>

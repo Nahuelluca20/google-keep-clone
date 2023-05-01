@@ -1,17 +1,33 @@
 import {SearchIcon} from "@chakra-ui/icons";
 import {Stack, HStack, Input, Text, Checkbox} from "@chakra-ui/react";
 import React, {useState} from "react";
-import {shallowEqual, useSelector} from "react-redux";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 
 import {Tag} from "@/utilities";
+import {addTagsToNoteById, deleteTagFromNoteById} from "@/redux/slices/notesSlice";
+import {AppDispatch} from "@/redux";
 
 interface Props {
   tagsProps: Tag[];
+  noteId: number;
 }
 
-const MenuTagsCheckBoxes: React.FC<Props> = ({tagsProps}) => {
+const MenuTagsCheckBoxes: React.FC<Props> = ({tagsProps, noteId}) => {
   const tags = useSelector((state: any) => state.tag.tags, shallowEqual);
   const [inputValue, setInputValue] = useState<string>("");
+  const dispatch = useDispatch<AppDispatch>();
+
+  console.log(tagsProps);
+  const handleCheckboxChange = (tag: Tag, isChecked: boolean) => {
+    const iDs = {id: noteId, tagId: tag._id};
+    const iDsAndName = {id: noteId, tagId: tag._id, tagName: tag.tagName};
+
+    if (isChecked) {
+      dispatch(addTagsToNoteById(iDsAndName));
+    } else {
+      dispatch(deleteTagFromNoteById(iDs));
+    }
+  };
 
   return (
     <>
@@ -41,8 +57,9 @@ const MenuTagsCheckBoxes: React.FC<Props> = ({tagsProps}) => {
             .map((tag: Tag) => (
               <Checkbox
                 key={tag._id}
-                defaultChecked={tagsProps.some((t) => t.tagName === tag.tagName)}
+                isChecked={tagsProps.some((t) => t.tagName === tag.tagName)}
                 size="sm"
+                onChange={(e) => handleCheckboxChange(tag, e.target.checked)}
               >
                 {tag.tagName}
               </Checkbox>

@@ -9,6 +9,7 @@ import {
   deleteNote,
   updateNote,
   deleteTagFromNote,
+  addTagsToNote,
 } from "@/services";
 
 interface NoteState {
@@ -61,6 +62,15 @@ const deleteTagFromNoteById = createAsyncThunk(
   },
 );
 
+const addTagsToNoteById = createAsyncThunk(
+  "notes/addTagsToNote",
+  async ({id, tagId, tagName}: {id: number; tagId: number; tagName: string}) => {
+    await addTagsToNote(id, tagId);
+
+    return {id, tagId, tagName};
+  },
+);
+
 const noteSlice = createSlice({
   name: "notes",
   initialState,
@@ -99,6 +109,25 @@ const noteSlice = createSlice({
         return note;
       });
     });
+    builder.addCase(addTagsToNoteById.fulfilled, (state, action) => {
+      const {id, tagId, tagName} = action.payload;
+
+      state.notes = state.notes.map((note) => {
+        if (note._id === id) {
+          const updatedTags = [
+            ...note.tags,
+            {
+              _id: tagId,
+              tagName: tagName,
+            },
+          ];
+
+          return {...note, tags: updatedTags};
+        }
+
+        return note;
+      });
+    });
     builder.addCase(updateNoteById.fulfilled, (state, action) => {
       const updatedNote = action.payload;
 
@@ -113,7 +142,7 @@ const noteSlice = createSlice({
   },
 });
 
-export {createNote, deleteNoteById, updateNoteById, deleteTagFromNoteById};
+export {createNote, deleteNoteById, updateNoteById, deleteTagFromNoteById, addTagsToNoteById};
 
 export const {addNote, addNotes} = noteSlice.actions;
 
