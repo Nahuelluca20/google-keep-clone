@@ -6,7 +6,7 @@ import {Tag} from "@/utilities";
 // Puedes reutilizarla para definir la estructura de un tag
 
 // URL base de la API para el endpoint de tags
-const API_BASE_URL = "https://web-production-6f63.up.railway.app/tags";
+const API_BASE_URL = "https://gray-tiny-newt.cyclic.app/tags";
 
 // Función que maneja errores de Axios
 function handleAxiosError(error: any) {
